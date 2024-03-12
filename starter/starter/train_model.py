@@ -48,6 +48,8 @@ X_test, y_test, encoder, lb = process_data(
     test, categorical_features=cat_features, label="salary", training=True
 )
 # Train and save a model.
-
+print("training model")
 trained_model = train_model(X_train, y_train)
-pickle.dumps(train_model)
+
+with open(r"model.pickle", "wb") as output_file:
+    pickle.dump(trained_model, output_file)
