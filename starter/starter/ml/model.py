@@ -1,5 +1,5 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-
+from sklearn.svm import SVC
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -17,8 +17,10 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
+    svc_model =   SVC(kernel="linear", C=0.025, random_state=42)
+    svc_model.fit(X_train, y_train)
 
-    pass
+    return svc_model
 
 
 def compute_model_metrics(y, preds):
