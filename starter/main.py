@@ -33,7 +33,7 @@ class Data(BaseModel):
     model_config = {
         "json_schema_extra": {
             "examples":[
-                {
+                    {
                     'age': 39,
                     'workclass':'State-gov', 
                     'fnlgt':77516,
@@ -48,8 +48,24 @@ class Data(BaseModel):
                     'capital_loss': 0,
                     'hours_per_week': 40,
                     'native_country':'United-States'
-                    }   
-                ]
+                    },
+                    {
+                    'age': 31,
+                    'workclass':'Private', 
+                    'fnlgt':84154,
+                    'education':'Some-college',
+                    'education_num':10,
+                    'marital_status': 'Married-civ-spouse',
+                    'occupation': 'Sales',
+                    'relationship':'Husband',
+                    'race':'White',
+                    'sex':'Male',
+                    'capital_gain': 0,
+                    'capital_loss': 0,
+                    'hours_per_week': 38,
+                    'native_country':'?'
+                    },  
+                    ]
             }
         }
     
