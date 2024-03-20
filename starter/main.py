@@ -7,11 +7,11 @@ import pickle
 import joblib
 
 app = FastAPI()
-with open("model/model.pickle", "rb") as f:
+with open("starter/model/model.pickle", "rb") as f:
     model = pickle.load(f) 
-with open("model/encoder.pickle", "rb") as f:
+with open("starter/model/encoder.pickle", "rb") as f:
     encoder = pickle.load(f) 
-with open("model/labeler.pickle", "rb") as f:
+with open("starter/model/labeler.pickle", "rb") as f:
     lb = pickle.load(f) 
 
 class Data(BaseModel):
