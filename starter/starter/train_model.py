@@ -21,14 +21,14 @@ def clean_data(data_df):
 def save_model(model, encoder, labeler):
 
 
-    with open(r"model/model.pickle", "wb") as output_file:
+    with open(r"starter/model/model.pickle", "wb") as output_file:
         pickle.dump(model, output_file)
-    with open(r"model/encoder.pickle", "wb") as output_file:
+    with open(r"starter/model/encoder.pickle", "wb") as output_file:
         pickle.dump(encoder, output_file)
-    with open(r"model/labeler.pickle", "wb") as output_file:
+    with open(r"starter/model/labeler.pickle", "wb") as output_file:
         pickle.dump(labeler, output_file)
 
-data_path = "./data/census_dummy.csv"
+data_path = "starter/data/census_dummy.csv"
 data_df = pd.read_csv(data_path)
 print(data_df.shape)
 data_df = clean_data(data_df)

@@ -10,7 +10,7 @@ import numpy as np
 
 @pytest.fixture(scope="module")
 def data():
-    data = pd.read_csv("data/census_dummy.csv")
+    data = pd.read_csv("starter/data/census_dummy.csv")
     data = clean_data(data)
     return data
 
@@ -88,7 +88,7 @@ def test_compute_model_metrics(ready_dataset, model):
     assert type(fbeta) == np.float64
 
 if __name__=="__main__":
-    data = pd.read_csv("data/census_dummy.csv")
+    data = pd.read_csv("starter/data/census_dummy.csv")
 
     train, test = tts(data, test_size= 0.2)
     cat_features = [
