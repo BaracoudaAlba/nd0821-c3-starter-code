@@ -39,6 +39,6 @@ def test_post_data_inferior():
     assert r.json() == {"pred": "<=50K"}
     
 if __name__=="__main__":
-    # test_api_greetings()
+    test_api_greetings()
     test_post_data_superior()
     test_post_data_inferior()    

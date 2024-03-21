@@ -8,7 +8,7 @@ import joblib
 import pandas as pd
 app = FastAPI()
 
-with open(".stater/model/model.pickle", "rb") as f:
+with open(".starter/model/model.pickle", "rb") as f:
     model = pickle.load(f) 
 with open(".starter/model/encoder.pickle", "rb") as f:
     encoder = pickle.load(f) 
