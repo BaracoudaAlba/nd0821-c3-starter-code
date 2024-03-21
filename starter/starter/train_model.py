@@ -36,7 +36,7 @@ def save_model(model, encoder, labeler):
     with open(r"starter/model/labeler.pickle", "wb") as output_file:
         pickle.dump(labeler, output_file)
 
-data_path = "starter/data/census_dummy.csv"
+data_path = "starter/data/census.csv"
 data_df = pd.read_csv(data_path)
 print(data_df.shape)
 data_df = clean_data(data_df)

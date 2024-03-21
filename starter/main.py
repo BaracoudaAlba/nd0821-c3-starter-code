@@ -102,5 +102,9 @@ async def inference_api(input_data : Data):
         lb=lb
     )
     output = inference(model=model, X=X)[0]
-    str_out = '<=50K' if output == 0 else '>50K'
-    return {"pred": str_out}
+    if output == 0:
+        output_string = '<=50K'
+    else: 
+        output_string = '>50K'
+
+    return {"predicted": output_string}
