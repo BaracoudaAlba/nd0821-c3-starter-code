@@ -5,16 +5,12 @@ import pandas as pd
 # Add the necessary imports for the starter code.
 # Add code to load in the data.
 import pdb
-
+import numpy as np
 import os
 print(os.getcwd())
 
-if __name__ == "__main__":
-    from ml.data import process_data
-    from ml.model import train_model, compute_model_metrics, inference
-else:
-    from starter.ml.data import process_data
-    from starter.ml.model import train_model, compute_model_metrics, inference
+from starter.ml.data import process_data
+from starter.ml.model import train_model, compute_model_metrics, inference
 
 import pickle
 
@@ -36,35 +32,39 @@ def save_model(model, encoder, labeler):
     with open(r"starter/model/labeler.pickle", "wb") as output_file:
         pickle.dump(labeler, output_file)
 
-data_path = "starter/data/census.csv"
-data_df = pd.read_csv(data_path)
-print(data_df.shape)
-data_df = clean_data(data_df)
+if __name__ == "__main__":
+
+    data_path = "starter/data/census.csv"
+    data_df = pd.read_csv(data_path)
+    print(data_df.shape)
+    data_df = clean_data(data_df)
 
 
-# Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = train_test_split(data_df, test_size=0.20)
+    # Optional enhancement, use K-fold cross validation instead of a train-test split.
+    train, test = train_test_split(data_df, test_size=0.20)
+    print(np.shape(train))
 
-cat_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
-]
+    cat_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
 
 
-X_train, y_train, encoder, lb = process_data(
-    train, categorical_features=cat_features, label="salary", training=True
-)
-# Proces the test data with the process_data function.
-X_test, y_test, encoder, lb = process_data(
-    test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
-)
-# Train and save a model.
-print("training model")
-trained_model = train_model(X_train, y_train)
-save_model(trained_model, encoder, lb)
+    X_train, y_train, encoder, lb = process_data(
+        train, categorical_features=cat_features, label="salary", training=True
+    )
+    print(np.shape(X_train))
+    # Proces the test data with the process_data function.
+    X_test, y_test, encoder, lb = process_data(
+        test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+    )
+    # Train and save a model.
+    print("training model")
+    # trained_model = train_model(X_train, y_train)
+    # save_model(trained_model, encoder, lb)
