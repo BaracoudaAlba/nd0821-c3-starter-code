@@ -78,7 +78,7 @@ async def greetings():
 
 #inference
 @app.post("/inference")
-async def inference_api(data : Data):
+async def inference_api(input_data : Data):
 
     cat_features = [
         "workclass",
@@ -90,8 +90,9 @@ async def inference_api(data : Data):
         "sex",
         "native-country",
     ]
-    sample = {k.replace('_', '-'): [v] for k, v in data.__dict__.items()}
-    input_data = pd.DataFrame.from_dict(sample)
+    
+    new_format = {k.replace('_', '-'): [v] for k, v in input_data.__dict__.items()}
+    input_data = pd.DataFrame.from_dict(new_format)
     X, _, _, _ = process_data(
         input_data,
         categorical_features=cat_features,
