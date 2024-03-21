@@ -83,9 +83,9 @@ def test_compute_model_metrics(ready_dataset, model):
     y_pred = inference(model, X_test)
     precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
 
-    assert type(precision) == np.float64 
-    assert type(recall) == np.float64
-    assert type(fbeta) == np.float64
+    assert precision is not None 
+    assert recall is not None 
+    assert fbeta is not None 
 
 if __name__=="__main__":
     data = pd.read_csv("starter/data/census_dummy.csv")

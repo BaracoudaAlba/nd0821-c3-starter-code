@@ -5,13 +5,14 @@ from starter.ml.model import inference
 from starter.ml.data import process_data
 import pickle
 import joblib
-
+import pandas as pd
 app = FastAPI()
-with open("starter/model/model.pickle", "rb") as f:
+
+with open("model/model.pickle", "rb") as f:
     model = pickle.load(f) 
-with open("starter/model/encoder.pickle", "rb") as f:
+with open("model/encoder.pickle", "rb") as f:
     encoder = pickle.load(f) 
-with open("starter/model/labeler.pickle", "rb") as f:
+with open("model/labeler.pickle", "rb") as f:
     lb = pickle.load(f) 
 
 class Data(BaseModel):
@@ -77,36 +78,28 @@ async def greetings():
 
 #inference
 @app.post("/inference")
-async def inference(input_data : Data):
+async def inference_api(data : Data):
 
     cat_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
     ]
-
-    data_df = {  'age': input_data.age,
-                'workclass': input_data.workclass, 
-                'fnlgt': input_data.fnlgt,
-                'education': input_data.education,
-                'education-num': input_data.education_num,
-                'marital-status': input_data.marital_status,
-                'occupation': input_data.occupation,
-                'relationship': input_data.relationship,
-                'race': input_data.race,
-                'sex': input_data.sex,
-                'capital-gain': input_data.capital_gain,
-                'capital-loss': input_data.capital_loss,
-                'hours-per-week': input_data.hours_per_week,
-                'native-country': input_data.native_country,
-                }
-    X_test, _, _, _ = process_data(
-        data_df, categorical_features=cat_features, label="salary", training=False, encoder = encoder, lb=lb
+    sample = {k.replace('_', '-'): [v] for k, v in data.__dict__.items()}
+    input_data = pd.DataFrame.from_dict(sample)
+    X, _, _, _ = process_data(
+        input_data,
+        categorical_features=cat_features,
+        label=None,
+        training=False,
+        encoder=encoder,
+        lb=lb
     )
-    predicted = inference(model, X_test)
-    return str(predicted)
+    output = inference(model=model, X=X)[0]
+    str_out = '<=50K' if output == 0 else '>50K'
+    return {"pred": str_out}

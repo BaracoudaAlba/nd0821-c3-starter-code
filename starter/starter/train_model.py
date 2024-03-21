@@ -3,10 +3,18 @@
 from sklearn.model_selection import train_test_split
 import pandas as pd
 # Add the necessary imports for the starter code.
-import pdb
 # Add code to load in the data.
-from starter.ml.data import process_data
-from starter.ml.model import train_model, compute_model_metrics, inference
+import pdb
+
+import os
+print(os.getcwd())
+
+if __name__ == "__main__":
+    from ml.data import process_data
+    from ml.model import train_model, compute_model_metrics, inference
+else:
+    from starter.ml.data import process_data
+    from starter.ml.model import train_model, compute_model_metrics, inference
 
 import pickle
 
