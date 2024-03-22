@@ -1,12 +1,10 @@
 # Put the code for your API here.
 from fastapi import FastAPI
 from pydantic import BaseModel
-from starter.ml.model import inference
-from starter.ml.data import process_data
+from  starter.starter.ml.model import inference
+from  starter.starter.ml.data import process_data
 import pickle
-import joblib
 import pandas as pd
-import pdb
 app = FastAPI()
 
 with open("starter/model/model.pickle", "rb") as f:
@@ -91,7 +89,8 @@ async def inference_api(input_data : Data):
         "sex",
         "native-country",
     ]
-    data_dict = {  'age': [input_data.age],
+    data_dict = {  
+            'age': [input_data.age],
             'workclass': [input_data.workclass], 
             'fnlgt': [input_data.fnlgt],
             'education': [input_data.education],
@@ -107,9 +106,6 @@ async def inference_api(input_data : Data):
             'native-country': [input_data.native_country]
             }
 
-    # pdb.set_trace()
-    # new_format = {k.replace('_', '-'): [v] for k, v in input_data.__dict__.items()}
-    # print(f"new format {new_format}")
     input_data = pd.DataFrame.from_dict(data_dict)
     X, _, _, _ = process_data(
         input_data,
