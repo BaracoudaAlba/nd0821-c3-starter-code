@@ -17,7 +17,7 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    svc_model = rfc()
+    svc_model = rfc(max_depth= 20)
 
     svc_model.fit(X_train, y_train)
 
