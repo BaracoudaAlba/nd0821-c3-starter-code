@@ -6,6 +6,7 @@ from starter.ml.data import process_data
 import pickle
 import joblib
 import pandas as pd
+import pdb
 app = FastAPI()
 
 with open("starter/model/model.pickle", "rb") as f:
@@ -90,10 +91,26 @@ async def inference_api(input_data : Data):
         "sex",
         "native-country",
     ]
-    
-    new_format = {k.replace('_', '-'): [v] for k, v in input_data.__dict__.items()}
-    print(f"new format {new_format}")
-    input_data = pd.DataFrame.from_dict(new_format)
+    data_dict = {  'age': inference.age,
+            'workclass': inference.workclass, 
+            'fnlgt': inference.fnlgt,
+            'education': inference.education,
+            'education-num': inference.education_num,
+            'marital-status': inference.marital_status,
+            'occupation': inference.occupation,
+            'relationship': inference.relationship,
+            'race': inference.race,
+            'sex': inference.sex,
+            'capital-gain': inference.capital_gain,
+            'capital-loss': inference.capital_loss,
+            'hours-per-week': inference.hours_per_week,
+            'native-country': inference.native_country,
+            }
+
+    # pdb.set_trace()
+    # new_format = {k.replace('_', '-'): [v] for k, v in input_data.__dict__.items()}
+    # print(f"new format {new_format}")
+    input_data = pd.DataFrame.from_dict(data_dict)
     X, _, _, _ = process_data(
         input_data,
         categorical_features=cat_features,
