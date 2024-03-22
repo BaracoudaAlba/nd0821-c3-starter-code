@@ -66,5 +66,5 @@ if __name__ == "__main__":
     )
     # Train and save a model.
     print("training model")
-    # trained_model = train_model(X_train, y_train)
-    # save_model(trained_model, encoder, lb)
+    trained_model = train_model(X_train, y_train)
+    save_model(trained_model, encoder, lb)
