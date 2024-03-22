@@ -1,0 +1,5 @@
+outs:
+- md5: 3b0d5a6eb8b4644a3c6f3a1c8033f3a3
+  size: 340
+  hash: md5
+  path: labeler.pickle
