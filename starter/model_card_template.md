@@ -14,7 +14,12 @@ Predict the salary of a person
 20% of the Training data used
 
 ## Metrics
-Precision, recall and F1 beta score 
+Precision, recall and F1 beta score are the metrics used. 
+
+The model's score in those metrics is: 
+- Precision: 0.912 
+- Recall: 0.742
+- F1 beta score: 0.818
 
 ## Ethical Considerations
 None.
