@@ -92,6 +92,7 @@ async def inference_api(input_data : Data):
     ]
     
     new_format = {k.replace('_', '-'): [v] for k, v in input_data.__dict__.items()}
+    print(f"new format {new_format}")
     input_data = pd.DataFrame.from_dict(new_format)
     X, _, _, _ = process_data(
         input_data,
